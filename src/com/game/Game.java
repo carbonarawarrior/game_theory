@@ -24,19 +24,26 @@ public class Game {
    *
    */
   public void start() {
+    boolean decisionA;
+    boolean decisionB;
     for (int i = 0; i < rounds; i++) {
 
       //lets each strat make a decision for each rounds
       //determines winner each time
+      
+      decisionA = this.A.makeDecision();
+      decisionB = this.B.makeDecision();
 
-      if (this.A.makeDecision() && this.B.makeDecision()) {
+      if (decisionA && decisionB) {
         this.A.recievePoints(3);
         this.B.recievePoints(3);
-      } else if (this.A.makeDecision() && !this.B.makeDecision()) {
+      } else if (decisionA && !decisionB) {
         this.B.recievePoints(5);
-      } else if (this.B.makeDecision() && !this.A.makeDecision()) {
+        this.A.recievePoints(0);
+      } else if (decisionB && !decisionA) {
         this.A.recievePoints(5);
-      } else if (!this.A.makeDecision() && !this.B.makeDecision()) {
+        this.B.recievePoints(0);
+      } else if (!decisionA && !decisionB) {
         this.A.recievePoints(1);//idk how this would happen 
         this.B.recievePoints(1);
       }

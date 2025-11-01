@@ -1,6 +1,6 @@
 package com.game;
 
-abstract class Strategy {
+public abstract class Strategy {
    /*
     *So in this example there are only two decisions a Strategy can make
     *
@@ -18,25 +18,35 @@ abstract class Strategy {
 
     }
 
-    int deltaPoints;
+    private int deltaPoints;
 
-    void updateDelta(int nd) {
-      deltaPoints = nd;
+    public void updateDelta(int nd) {
+      this.deltaPoints = nd;
     }
 
-    abstract boolean makeDecision();
+    protected int getDelta() {
+      return deltaPoints;
+    }
+
+    public abstract boolean makeDecision();
 
 }
 
 class Tit_For_Tat extends Strategy {
+  public Tit_For_Tat() {
+    this.updateDelta(5);
+  }
+
+
+  @Override
   public boolean makeDecision() {
-    if (deltaPoints == 1) {
+    if (this.getDelta() == 1) {
       return false;
-    } else if (deltaPoints == 3) {
+    } else if (this.getDelta() == 3) {
       return true;
-    } else if (deltaPoints == 5) {
+    } else if (this.getDelta() == 5) {
       return true;
-    } else if (deltaPoints == 0) {
+    } else if (this.getDelta() == 0) {
       return false;
     } else {
       return true;
@@ -45,6 +55,8 @@ class Tit_For_Tat extends Strategy {
 
 }
 class Naieve extends Strategy {
+
+  @Override
   public boolean makeDecision() {
     return true;  
   }
@@ -52,6 +64,8 @@ class Naieve extends Strategy {
 }
 
 class Meanie extends Strategy {
+
+  @Override
   public boolean makeDecision() {
     return false;
   }

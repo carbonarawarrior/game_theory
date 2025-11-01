@@ -23,10 +23,10 @@ public class Player {
   public void recievePoints(int numPoints) {
     points += numPoints;
     deltaPoints = numPoints;
+    strat.updateDelta(deltaPoints);
   }
 
   public boolean makeDecision() {
-    strat.updateDelta(deltaPoints);
     return strat.makeDecision();
   }
 }
