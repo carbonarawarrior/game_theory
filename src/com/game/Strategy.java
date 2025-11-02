@@ -18,14 +18,14 @@ public abstract class Strategy {
 
     }
 
-    private int deltaPoints;
+    private boolean oppLastMove;
 
-    public void updateDelta(int nd) {
-      this.deltaPoints = nd;
+    public void updateOppLastMove(boolean lastMove) {
+      this.oppLastMove = lastMove;
     }
 
-    protected int getDelta() {
-      return deltaPoints;
+    protected boolean getLastMove() {
+      return oppLastMove;
     }
 
     public abstract boolean makeDecision();
@@ -34,20 +34,16 @@ public abstract class Strategy {
 
 class Tit_For_Tat extends Strategy {
   public Tit_For_Tat() {
-    this.updateDelta(5);
+    this.updateOppLastMove(true);
   }
 
 
   @Override
   public boolean makeDecision() {
-    if (this.getDelta() == 1) {
+    if (!this.getLastMove()) {
       return false;
-    } else if (this.getDelta() == 3) {
+    }  else if (this.getLastMove()) {
       return true;
-    } else if (this.getDelta() == 5) {
-      return true;
-    } else if (this.getDelta() == 0) {
-      return false;
     } else {
       return true;
     }

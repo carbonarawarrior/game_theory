@@ -3,7 +3,9 @@ package com.game;
 public class Game {
   private int rounds;
   private Player A;
+  private boolean lastA;
   private Player B;
+  private boolean lastB;
 
   public Game(int numRounds, Player p1, Player p2) {
     this.rounds = numRounds;
@@ -35,18 +37,22 @@ public class Game {
       decisionB = this.B.makeDecision();
 
       if (decisionA && decisionB) {
-        this.A.recievePoints(3);
-        this.B.recievePoints(3);
+        this.A.receivePoints(3);
+        this.B.receivePoints(3);
       } else if (decisionA && !decisionB) {
-        this.B.recievePoints(5);
-        this.A.recievePoints(0);
+        this.B.receivePoints(5);
+        this.A.receivePoints(0);
       } else if (decisionB && !decisionA) {
-        this.A.recievePoints(5);
-        this.B.recievePoints(0);
+        this.A.receivePoints(5);
+        this.B.receivePoints(0);
       } else if (!decisionA && !decisionB) {
-        this.A.recievePoints(1);//idk how this would happen 
-        this.B.recievePoints(1);
+        this.A.receivePoints(1); 
+        this.B.receivePoints(1);
       }
+
+      //update the two players on the opponents decison
+      this.A.updateOppLastMove(decisionB);
+      this.B.updateOppLastMove(decisionA);
 
 
     }

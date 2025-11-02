@@ -3,7 +3,7 @@ package com.game;
 public class Player {
   private String name;
   private int points;
-  private int deltaPoints;
+  private boolean oppLastMove;
   private Strategy strat;
 
   public Player(String name, Strategy strat) {
@@ -20,10 +20,14 @@ public class Player {
     return this.name;
   }
 
-  public void recievePoints(int numPoints) {
+  public void updateOppLastMove(boolean decision) {
+    this.oppLastMove = decision;
+    this.strat.updateOppLastMove(decision);
+  }
+  
+
+  public void receivePoints(int numPoints) {
     points += numPoints;
-    deltaPoints = numPoints;
-    strat.updateDelta(deltaPoints);
   }
 
   public boolean makeDecision() {
