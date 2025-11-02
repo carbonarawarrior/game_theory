@@ -3,9 +3,7 @@ package com.game;
 public class Game {
   private int rounds;
   private Player A;
-  private boolean lastA;
   private Player B;
-  private boolean lastB;
 
   public Game(int numRounds, Player p1, Player p2) {
     this.rounds = numRounds;

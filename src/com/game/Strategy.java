@@ -34,19 +34,14 @@ public abstract class Strategy {
 
 class Tit_For_Tat extends Strategy {
   public Tit_For_Tat() {
+    //this is so that tit for tat trusts first
     this.updateOppLastMove(true);
   }
 
 
   @Override
   public boolean makeDecision() {
-    if (!this.getLastMove()) {
-      return false;
-    }  else if (this.getLastMove()) {
-      return true;
-    } else {
-      return true;
-    }
+    return this.getLastMove();
   }
 
 }
@@ -64,6 +59,30 @@ class Meanie extends Strategy {
   @Override
   public boolean makeDecision() {
     return false;
+  }
+
+}
+
+class Tit_For_Two_Tats extends Strategy {
+  public Tit_For_Two_Tats() {
+    //this is so that tit for two tats trusts first
+    this.pastTwoDecisions[0] = true;
+    this.pastTwoDecisions[1] = true;
+  }
+
+  private boolean[] pastTwoDecisions = new boolean[2];
+  @Override
+  public void updateOppLastMove(boolean lastMove) {
+    this.pastTwoDecisions[0] = this.pastTwoDecisions[1];
+    this.pastTwoDecisions[1] = lastMove;
+  }
+
+  @Override
+  public boolean makeDecision() {
+    if (this.pastTwoDecisions[0] == false && this.pastTwoDecisions[1] == false) {
+      return false;
+    }
+    return true;
   }
 
 }
