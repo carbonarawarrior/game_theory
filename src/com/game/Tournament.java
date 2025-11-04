@@ -4,10 +4,22 @@ import java.util.ArrayList;
 
 public class Tournament {
   private ArrayList<Player> playerList;
-  private ArrayList<Game> allGames;
+
+  private Player[] highestTotalPoints;
+  private Player[] highestAveragePoints;
+  private Player[] mostWins;
 
   public Tournament() {
     this.playerList = new ArrayList<Player>();
+
+    this.highestTotalPoints = new Player[10];
+    this.highestAveragePoints = new Player[10];
+    this.mostWins = new Player[10];
+  }
+
+  private void updateBoards() {
+
+
   }
 
 
@@ -25,16 +37,12 @@ public class Tournament {
     return playerList.get(index);
   }
 
-  protected void setUpGames() {
-    this.allGames = new ArrayList<Game>();
-
-    int A = 0;
-    int B = 0;
+  public void runAllGames() {
     Game currentGame;
     for (int i = 0; i < playerList.size(); i++) {
       for (int j = i + 1; j < playerList.size(); j++) {
         currentGame = new Game(this.getPlayer(i), this.getPlayer(j));
-        this.allGames.add(currentGame);
+        currentGame.start();
       }
     }
   }
