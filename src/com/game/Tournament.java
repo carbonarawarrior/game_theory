@@ -34,6 +34,7 @@ public class Tournament {
     for (int i = 0; i < playerList.size(); i++) {
       for (int j = i + 1; j < playerList.size(); j++) {
         currentGame = new Game(this.getPlayer(i), this.getPlayer(j));
+        this.allGames.add(currentGame);
       }
     }
   }

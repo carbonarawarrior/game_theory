@@ -50,7 +50,7 @@ public class Player {
     }
 
     this.numGames++;
-    this.averagePoints = this.totalPoints/this.numGames;
+    this.averagePoints = (double) this.totalPoints/this.numGames;
 
     this.points = 0;
   }

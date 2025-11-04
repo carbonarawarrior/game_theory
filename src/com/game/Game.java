@@ -19,7 +19,7 @@ public class Game {
     this.doubleWinReward = dwr;
     this.betrayWinReward = bwr;
     this.betrayLosePenalty = blp;
-    this.betrayLosePenalty = dlp;
+    this.doubleLosePenalty = dlp;
   }
 
 
@@ -31,7 +31,7 @@ public class Game {
     this.doubleWinReward = 3;
     this.betrayWinReward = 5;
     this.betrayLosePenalty = 0;
-    this.betrayLosePenalty = 1;
+    this.doubleLosePenalty = 1;
 
   }
 
@@ -44,7 +44,7 @@ public class Game {
     this.doubleWinReward = 3;
     this.betrayWinReward = 5;
     this.betrayLosePenalty = 0;
-    this.betrayLosePenalty = 1;
+    this.doubleLosePenalty = 1;
   }
 
   /*
@@ -95,6 +95,9 @@ public class Game {
     } else if (pointsB > pointsA) {
       this.A.endGame(false);
       this.B.endGame(true);
+    } else {
+      this.A.endGame(false);
+      this.B.endGame(false);
     }
   }
 
