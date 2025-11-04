@@ -21,6 +21,7 @@ public abstract class Strategy {
     }
 
     private boolean oppLastMove;
+    protected boolean isRandom; //may come in helpful for optimizations
 
     public void updateOppLastMove(boolean lastMove) {
       this.oppLastMove = lastMove;
@@ -38,6 +39,7 @@ class Tit_For_Tat extends Strategy {
   public Tit_For_Tat() {
     //this is so that tit for tat trusts first
     this.updateOppLastMove(true);
+    this.isRandom = false;
   }
 
 
@@ -49,6 +51,10 @@ class Tit_For_Tat extends Strategy {
 }
 class Naieve extends Strategy {
 
+  public Naieve() {
+    this.isRandom = false;
+  }
+
   @Override
   public boolean makeDecision() {
     return true;  
@@ -58,6 +64,9 @@ class Naieve extends Strategy {
 
 class Meanie extends Strategy {
 
+  public Meanie() {
+    this.isRandom = false;
+  }
   @Override
   public boolean makeDecision() {
     return false;
@@ -70,6 +79,7 @@ class Tit_For_Two_Tats extends Strategy {
     //this is so that tit for two tats trusts first
     this.pastTwoDecisions[0] = true;
     this.pastTwoDecisions[1] = true;
+    this.isRandom = false;
   }
 
   private boolean[] pastTwoDecisions = new boolean[2];
@@ -93,6 +103,7 @@ class Random extends Strategy {
 
   public Random() {
     this.updateOppLastMove(this.makeDecision());
+    this.isRandom = true;
   }
 
   @Override

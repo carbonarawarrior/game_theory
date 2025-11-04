@@ -9,6 +9,15 @@ public class Main {
     prisoners.start();
     */
 
+    Player pTest;
+    Tournament test = new Tournament();
+    for (int i = 0; i < 20; i++) {
+      pTest = new Player("wee", new Meanie());
+      test.addPlayer(pTest);
+    }
+
+    test.setUpGames();
+
 
   }
 }

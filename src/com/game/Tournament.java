@@ -1,17 +1,40 @@
 package com.game;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Tournament {
-  private HashMap<int, Player> playerList = new HaspMap<int, Player>();
+  private ArrayList<Player> playerList;
+  private ArrayList<Game> allGames;
 
   public Tournament() {
-
+    this.playerList = new ArrayList<Player>();
   }
 
 
-  public addPlayer(String name, Strategy strat) {
-    int id = playerList.size()++;
-    Player p = new Player(name, id, strat);
+  public void addPlayer(String name, Strategy strat) {
+    Player p = new Player(name, strat);
+    this.playerList.add(p);
+  }
+
+  public void addPlayer(Player p) {
+    this.playerList.add(p);
+  }
+  
+
+  public Player getPlayer(int index) {
+    return playerList.get(index);
+  }
+
+  protected void setUpGames() {
+    this.allGames = new ArrayList<Game>();
+
+    int A = 0;
+    int B = 0;
+    Game currentGame;
+    for (int i = 0; i < playerList.size(); i++) {
+      for (int j = i + 1; j < playerList.size(); j++) {
+        currentGame = new Game(this.getPlayer(i), this.getPlayer(j));
+      }
+    }
   }
 }
