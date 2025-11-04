@@ -5,16 +5,46 @@ public class Game {
   private Player A;
   private Player B;
 
+  //weights
+  private int doubleWinReward;
+  private int betrayWinReward;
+  private int betrayLosePenalty;
+  private int doubleLosePenalty;
+  
+  public Game(int numRounds, Player p1, Player p2, int dwr, int bwr, int blp, int dlp) {
+    this.rounds = numRounds;
+    this.A = p1;
+    this.B = p2;
+    
+    this.doubleWinReward = dwr;
+    this.betrayWinReward = bwr;
+    this.betrayLosePenalty = blp;
+    this.betrayLosePenalty = dlp;
+  }
+
+
   public Game(int numRounds, Player p1, Player p2) {
     this.rounds = numRounds;
     this.A = p1;
     this.B = p2;
+    
+    this.doubleWinReward = 3;
+    this.betrayWinReward = 5;
+    this.betrayLosePenalty = 0;
+    this.betrayLosePenalty = 1;
+
   }
 
+  //default constructor
   public Game(Player p1, Player p2) {
     this.rounds = 500;
     this.A = p1;
     this.B = p2;
+
+    this.doubleWinReward = 3;
+    this.betrayWinReward = 5;
+    this.betrayLosePenalty = 0;
+    this.betrayLosePenalty = 1;
   }
 
   /*
@@ -35,17 +65,17 @@ public class Game {
       decisionB = this.B.makeDecision();
 
       if (decisionA && decisionB) {
-        this.A.receivePoints(3);
-        this.B.receivePoints(3);
+        this.A.receivePoints(this.doubleWinReward);
+        this.B.receivePoints(this.doubleWinReward);
       } else if (decisionA && !decisionB) {
-        this.B.receivePoints(5);
-        this.A.receivePoints(0);
+        this.B.receivePoints(this.betrayWinReward);
+        this.A.receivePoints(this.betrayLosePenalty);
       } else if (decisionB && !decisionA) {
-        this.A.receivePoints(5);
-        this.B.receivePoints(0);
+        this.A.receivePoints(this.betrayWinReward);
+        this.B.receivePoints(this.betrayLosePenalty);
       } else if (!decisionA && !decisionB) {
-        this.A.receivePoints(1); 
-        this.B.receivePoints(1);
+        this.A.receivePoints(this.doubleLosePenalty); 
+        this.B.receivePoints(this.doubleLosePenalty);
       }
 
       //update the two players on the opponents decison
@@ -59,12 +89,10 @@ public class Game {
     int pointsA = A.getPoints();
     int pointsB = B.getPoints();
     
-    if (pointsA == pointsB) {
-      System.out.println("Tie!");
-    } else if (pointsA > pointsB) {
-      System.out.println("A!");
+    if (pointsA > pointsB) {
+      this.A.giveWin();
     } else if (pointsB > pointsA) {
-      System.out.println("B!");
+      this.B.giveWin();
     }
   }
 

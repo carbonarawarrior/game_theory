@@ -1,5 +1,7 @@
 package com.game;
 
+import java.lang.Math;
+//later I might try to refactor this to use functional programming to avoid goofiness
 public abstract class Strategy {
    /*
     *So in this example there are only two decisions a Strategy can make
@@ -85,4 +87,26 @@ class Tit_For_Two_Tats extends Strategy {
     return true;
   }
 
+}
+
+class Random extends Strategy {
+
+  public Random() {
+    this.updateOppLastMove(this.makeDecision());
+  }
+
+  @Override
+  public boolean makeDecision() { 
+    int result = (int) (Math.random() * 2);
+
+    if (result == 1) {
+      return true;
+    }
+
+    if (result == 0) {
+      return false;
+    }
+
+    return true;//should never happern
+  }
 }
