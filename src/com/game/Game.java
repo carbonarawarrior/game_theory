@@ -90,9 +90,11 @@ public class Game {
     int pointsB = B.getPoints();
     
     if (pointsA > pointsB) {
-      this.A.giveWin();
+      this.A.endGame(true);
+      this.B.endGame(false);
     } else if (pointsB > pointsA) {
-      this.B.giveWin();
+      this.A.endGame(false);
+      this.B.endGame(true);
     }
   }
 
