@@ -108,16 +108,6 @@ class Random extends Strategy {
 
   @Override
   public boolean makeDecision() { 
-    int result = (int) (Math.random() * 2);
-
-    if (result == 1) {
-      return true;
-    }
-
-    if (result == 0) {
-      return false;
-    }
-
-    return true;//should never happern
+    return (Math.random <= .50);
   }
 }
